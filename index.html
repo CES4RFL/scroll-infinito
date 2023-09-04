@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll infinito</title>
+</head>
+<style>
+    .container{
+        align-items: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .box {
+        width: 700px;
+        height: 200px;
+        padding: 18px;
+        margin: 30px 0;
+        border-radius: 30 px;
+        background-color: blueviolet;
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>Scroll infinito</h1>
+
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    
+    <script>
+        //Se crea el listener que escuchara el evento del DOM scroll
+        window.addEventListener('scroll', ()=>{
+            //Se obtiene el elemento raiz del DOM para aplicar una deconstruccion y obtener los
+            //atributos para obtener la posisicon de la pantalla
+            const {scrollHeight,clientHeight,scrollTop} = document.documentElement
+
+            //Se valida si la posision del scroll con la posicion actual es mayor a la altura del scroll
+            if(scrollTop + clientHeight > scrollHeight - 4) {newContainer()}
+        })
+        
+        //Se obtiene el elemento del bloque donde agregaremos elementos si es que la condicion del scroll continua
+        const container = document.querySelector(".container")
+        //En caso de cumplir se llama la arrow function que nos permite agregar un elemento de tipo div al arbol de objetos del elemento 
+        //"container"
+        const newContainer = () => {
+            const box = document.createElement('div')
+            box.className = 'box'
+            container.appendChild(box)
+        }
+    </script>
+</body>
+</html>
